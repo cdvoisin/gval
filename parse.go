@@ -39,7 +39,7 @@ func (p *Parser) ParseNextExpression(c context.Context) (eval Evaluable, err err
 	return ex(c, p)
 }
 
-func parseString(c context.Context, p *Parser) (Evaluable, error) {
+func ParseString(c context.Context, p *Parser) (Evaluable, error) {
 	return parseString(c, p)
 }
 
