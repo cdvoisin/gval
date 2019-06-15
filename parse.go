@@ -244,6 +244,10 @@ func parseIf(c context.Context, p *Parser, e Evaluable) (Evaluable, error) {
 	}, nil
 }
 
+func ParseJSONArray(c context.Context, p *Parser) (Evaluable, error) {
+	return parseJSONArray(c, p)
+}
+
 func parseJSONArray(c context.Context, p *Parser) (Evaluable, error) {
 	evals := []Evaluable{}
 	for {
