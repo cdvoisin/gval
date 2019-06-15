@@ -40,6 +40,10 @@ func (p *Parser) ParseNextExpression(c context.Context) (eval Evaluable, err err
 }
 
 func parseString(c context.Context, p *Parser) (Evaluable, error) {
+	return parseString(c, p)
+}
+
+func parseString(c context.Context, p *Parser) (Evaluable, error) {
 	s, err := strconv.Unquote(p.TokenText())
 	if err != nil {
 		return nil, fmt.Errorf("could not parse string: %s", err)
@@ -53,6 +57,10 @@ func parseNumber(c context.Context, p *Parser) (Evaluable, error) {
 		return nil, err
 	}
 	return p.Const(n), nil
+}
+
+func ParseParentheses(c context.Context, p *Parser) (Evaluable, error) {
+	return parseParentheses(c, p)
 }
 
 func parseParentheses(c context.Context, p *Parser) (Evaluable, error) {
@@ -121,6 +129,10 @@ func (p *Parser) parseOperator(c context.Context, stack *stageStack, eval Evalua
 	}
 }
 
+func ParseIdent(c context.Context, p *Parser) (call string, alternative func() (Evaluable, error), err error) {
+	return parseIdent(c, p)
+}
+
 func parseIdent(c context.Context, p *Parser) (call string, alternative func() (Evaluable, error), err error) {
 	token := p.TokenText()
 	return token,
@@ -185,6 +197,10 @@ func (p *Parser) parseArguments(c context.Context) (args []Evaluable, err error)
 			return nil, p.Expected("arguments", ')', ',')
 		}
 	}
+}
+
+func InArray(a, b interface{}) (interface{}, error) {
+	return inArray(a, b)
 }
 
 func inArray(a, b interface{}) (interface{}, error) {
